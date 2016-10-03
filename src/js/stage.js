@@ -19,9 +19,9 @@
           var ry = canvas.getRadiansFromDegrees(shape.ry);
           var rz = canvas.getRadiansFromDegrees(shape.rz);
 
-          var x = shape.x + v.x * shape.sx;
-          var y = shape.y + v.y * shape.sy;
-          var z = shape.z + v.z * shape.sz;
+          var x = v.x;
+          var y = v.y;
+          var z = v.z;
 
           // x * x & z
           // y * y & z
@@ -43,6 +43,10 @@
           x = Math.cos(angle + rz) * distance;
           y = Math.sin(angle + rz) * distance;
           z = z;
+
+          x = shape.x + x * shape.sx;
+          y = shape.y + y * shape.sy;
+          z = shape.z + z * shape.sz;
 
           canvas
             .beginPath()
