@@ -7,6 +7,10 @@
     "start": "http-server . -c-1 -o",
     "test": "eslint -c node_modules/eslintrc/.eslintrc-es5 src/js/"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakesidsmith/3d-canvas-renderer.git"
+  },
   "keywords": [
     "3d",
     "render",
@@ -19,6 +23,10 @@
   ],
   "author": "Jake 'Sid' Smith",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jakesidsmith/3d-canvas-renderer/issues"
+  },
+  "homepage": "https://github.com/jakesidsmith/3d-canvas-renderer#readme",
   "dependencies": {
     "canvasimo": "=0.5.2"
   },
