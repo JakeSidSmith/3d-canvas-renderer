@@ -4,8 +4,8 @@
 
 (function () {
 
-  var far = 1000;
-  var close = -1000;
+  // var far = 1000;
+  // var close = -1000;
 
   window.Stage = function Stage (element) {
     var self = this;
