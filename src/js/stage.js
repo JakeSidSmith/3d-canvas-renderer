@@ -19,17 +19,30 @@
           var ry = canvas.getRadiansFromDegrees(shape.ry);
           var rz = canvas.getRadiansFromDegrees(shape.rz);
 
-          var scaledX = shape.x + v.x * shape.sx;
-          var scaledY = shape.y + v.y * shape.sy;
-          var scaledZ = shape.z + v.z * shape.sz;
+          var x = shape.x + v.x * shape.sx;
+          var y = shape.y + v.y * shape.sy;
+          var z = shape.z + v.z * shape.sz;
 
           // x * x & z
           // y * y & z
           // z * x & y
 
-          var x = Math.cos(rx) * scaledX + Math.sin(rx) * scaledZ;
-          var y = Math.cos(ry) * scaledY + Math.sin(ry) * scaledZ;
-          var z = Math.cos(rx) * scaledZ + Math.sin(rx) * scaledX + Math.cos(ry) * scaledZ + Math.sin(ry) * scaledY;
+          // Rotation X
+          x = Math.cos(rx) * x + Math.sin(rx) * z;
+          y = y;
+          z = Math.cos(rx) * z + Math.sin(rx) * x;
+
+          // Rotation Y
+          x = x;
+          y = Math.cos(ry) * y + Math.sin(ry) * z;
+          z = Math.cos(ry) * z + Math.sin(ry) * y;
+
+          // Rotation Z
+          var distance = canvas.getDistance(0, 0, x, y);
+          var angle = canvas.getAngle(0, 0, x, y);
+          x = Math.cos(angle + rz) * distance;
+          y = Math.sin(angle + rz) * distance;
+          z = z;
 
           canvas
             .beginPath()
