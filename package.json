@@ -1,0 +1,29 @@
+{
+  "name": "3d-canvas-renderer",
+  "version": "0.0.0",
+  "description": "Messing around with rendering 3D objects on a 2D canvas",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server . -c-1 -o",
+    "test": "eslint -c node_modules/eslintrc/.eslintrc-es5 src/js/"
+  },
+  "keywords": [
+    "3d",
+    "render",
+    "rendering",
+    "renderer",
+    "object",
+    "shapes",
+    "canvas",
+    "html5"
+  ],
+  "author": "Jake 'Sid' Smith",
+  "license": "MIT",
+  "dependencies": {
+    "canvasimo": "=0.5.2"
+  },
+  "devDependencies": {
+    "eslintrc": "git+https://github.com/JakeSidSmith/eslintrc.git#v0.0.2",
+    "http-server": "=0.9.0"
+  }
+}
