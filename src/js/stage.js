@@ -15,19 +15,25 @@
     self.drawShape = function drawShape (shape) {
       canvas
         .forEach(shape.vertices, function (v) {
+          var rx = canvas.getRadiansFromDegrees(shape.rx);
+          var ry = canvas.getRadiansFromDegrees(shape.ry);
+          var rz = canvas.getRadiansFromDegrees(shape.rz);
+
           var scaledX = shape.x + v.x * shape.sx;
           var scaledY = shape.y + v.y * shape.sy;
+          var scaledZ = shape.z + v.z * shape.sz;
 
-          var distanceXY = canvas.getDistance(0, 0, scaledX, scaledY);
-          var angleZ = canvas.getAngle(0, 0, scaledX, scaledY);
+          // x * x & z
+          // y * y & z
+          // z * x & y
 
-          var rotatedX = Math.cos(angleZ + canvas.getRadiansFromDegrees(shape.rz)) * distanceXY;
-          var rotatedY = Math.sin(angleZ + canvas.getRadiansFromDegrees(shape.rz)) * distanceXY;
-          // var z = shape.z + v.z * shape.sz;
+          var x = Math.cos(rx) * scaledX + Math.sin(rx) * scaledZ;
+          var y = Math.cos(ry) * scaledY + Math.sin(ry) * scaledZ;
+          var z = Math.cos(rx) * scaledZ + Math.sin(rx) * scaledX + Math.cos(ry) * scaledZ + Math.sin(ry) * scaledY;
 
           canvas
             .beginPath()
-            .plotPixel(rotatedX, rotatedY)
+            .plotPixel(x, y)
             .closePath()
             .fill('black');
         });
