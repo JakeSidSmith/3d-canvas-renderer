@@ -18,7 +18,7 @@
 
   function update () {
     var nextTime = performance.now();
-    var delta = (nextTime - prevTime) * 0.1;
+    var delta = (nextTime - prevTime) * 0.02;
 
     rotationX += delta * 0.5;
     rotationY += delta * 1;
