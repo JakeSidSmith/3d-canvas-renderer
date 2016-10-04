@@ -1,4 +1,4 @@
-/* global Stage, Shape, get, getObjectProperties */
+/* global Vector, Stage, Shape, get, getObjectProperties */
 
 'use strict';
 
@@ -9,7 +9,7 @@
   var teapot;
   var velocity = new Vector(0, 0, 0);
   var rotation = new Vector(0, 0, 0);
-  var prevTime = performance.now();
+  // var prevTime = performance.now();
   var stage = new Stage(document.getElementById('canvas'));
 
   function scaleTeapot () {
@@ -18,8 +18,8 @@
   }
 
   function update () {
-    var nextTime = performance.now();
-    var delta = (nextTime - prevTime) * 0.02;
+    // var nextTime = performance.now();
+    // var delta = (nextTime - prevTime) * 0.02; // Roughly 1
 
     rotation.add(velocity);
 
@@ -28,7 +28,7 @@
 
     velocity.mul(0.9);
 
-    prevTime = nextTime;
+    // prevTime = nextTime;
     window.requestAnimationFrame(update);
   }
 
