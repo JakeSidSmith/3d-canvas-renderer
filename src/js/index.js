@@ -14,7 +14,7 @@
 
   function scaleTeapot () {
     var scale = Math.min(window.innerWidth, window.innerHeight) / 10;
-    teapot.setScale(scale, scale, scale);
+    teapot.scale(scale, scale, scale);
   }
 
   function update () {
@@ -23,7 +23,7 @@
 
     rotation.add(velocity);
 
-    teapot.setRotation(rotation.x, rotation.y, rotation.z);
+    teapot.rotate(rotation.x, rotation.y, rotation.z);
     stage.draw();
 
     velocity.mul(0.9);

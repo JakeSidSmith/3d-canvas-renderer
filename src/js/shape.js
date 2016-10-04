@@ -62,16 +62,22 @@
       });
     };
 
-    self.setScale = function scale (sx, sy, sz) {
+    self.scale = function scale (sx, sy, sz) {
       self.sx = sx;
       self.sy = sy;
       self.sz = sz;
     };
 
-    self.setRotation = function scale (rx, ry, rz) {
+    self.rotate = function scale (rx, ry, rz) {
       self.rx = rx;
       self.ry = ry;
       self.rz = rz;
+    };
+
+    self.translate = function (x, y, z) {
+      self.x = x;
+      self.y = y;
+      self.z = z;
     };
 
     return self;
