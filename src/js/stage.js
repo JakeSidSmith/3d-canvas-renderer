@@ -1,4 +1,4 @@
-/* global Canvasimo */
+/* global Canvasimo, Vector */
 
 'use strict';
 
@@ -9,51 +9,60 @@
     var shapes = [];
     var canvas = new Canvasimo(element);
 
+    function rotate (direction, axis1, axis2, v, r) {
+      var distance = canvas.getDistance(0, 0, v[axis1], v[axis2]);
+      var angle = canvas.getAngle(0, 0, v[axis1], v[axis2]);
+      v[axis1] = Math.cos(angle + r[direction]) * distance;
+      v[axis2] = Math.sin(angle + r[direction]) * distance;
+    }
+
+    rotate.x = rotate.bind(null, 'x', 'y', 'z');
+    rotate.y = rotate.bind(null, 'y', 'x', 'z');
+    rotate.z = rotate.bind(null, 'z', 'x', 'z');
+
+    rotate.all = function rotateAll (v, r) {
+      rotate.x(v, r);
+      rotate.y(v, r);
+      rotate.z(v, r);
+    }
+
+    function scale (v, shape) {
+      v.x *= shape.sx;
+      v.y *= shape.sy;
+      v.z *= shape.sz;
+    }
+
+    function translate (v, shape) {
+      v.x += shape.x;
+      v.y += shape.y;
+      v.z += shape.z;
+    }
+
     self.drawShape = function drawShape (shape) {
       canvas
-        .forEach(shape.vertices, function (v) {
-          var rx = canvas.getRadiansFromDegrees(shape.rx);
-          var ry = canvas.getRadiansFromDegrees(shape.ry);
-          var rz = canvas.getRadiansFromDegrees(shape.rz);
+        .forEach(shape.vertices, function (vertex) {
+          var r = {
+            x: canvas.getRadiansFromDegrees(shape.rx),
+            y: canvas.getRadiansFromDegrees(shape.ry),
+            z: canvas.getRadiansFromDegrees(shape.rz)
+          };
 
-          var x = v.x;
-          var y = v.y;
-          var z = v.z;
-
-          // x * x & z
-          // y * y & z
-          // z * x & y
+          var v = {
+            x: vertex.x,
+            y: vertex.y,
+            z: vertex.z
+          };
 
           // Rotation X
-          var distance = canvas.getDistance(0, 0, y, z);
-          var angle = canvas.getAngle(0, 0, y, z);
-          x = x;
-          y = Math.cos(angle + rx) * distance;
-          z = Math.sin(angle + rx) * distance;
-
-          // Rotation Y
-          distance = canvas.getDistance(0, 0, x, z);
-          angle = canvas.getAngle(0, 0, x, z);
-          x = Math.cos(angle + ry) * distance;
-          y = y;
-          z = Math.sin(angle + ry) * distance;
-
-          // // Rotation Z
-          distance = canvas.getDistance(0, 0, x, y);
-          angle = canvas.getAngle(0, 0, x, y);
-          x = Math.cos(angle + rz) * distance;
-          y = Math.sin(angle + rz) * distance;
-          z = z;
-
-          x = shape.x + x * shape.sx;
-          y = shape.y + y * shape.sy;
-          z = shape.z + z * shape.sz;
+          rotate.all(v, r);
+          scale(v, shape);
+          translate(v, shape);
 
           canvas
             .beginPath()
-            .plotPixel(x, y)
+            .plotPixel(v.x, v.y)
             .closePath()
-            .fill(canvas.createHSL(120 + z / 2, 100, 35));
+            .fill(canvas.createHSL(120 + v.z / 2, 100, 35));
         });
     };
 

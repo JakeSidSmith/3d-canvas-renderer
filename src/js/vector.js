@@ -4,6 +4,7 @@
 
   window.Vector = function Vector (x, y, z) {
     var self = this;
+
     self.x = parseFloat(x);
     self.y = parseFloat(y);
     self.z = parseFloat(z);
