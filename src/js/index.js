@@ -45,8 +45,8 @@
 
     if (down && pmouse) {
       velocity.add({
-        x: (pmouse.clientY - event.clientY) / 50,
-        y: (pmouse.clientX - event.clientX) / 50,
+        x: (pmouse.clientY - event.clientY) / 20,
+        y: (pmouse.clientX - event.clientX) / 20,
         z: 0
       });
     }
