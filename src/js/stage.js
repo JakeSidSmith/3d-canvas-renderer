@@ -18,7 +18,7 @@
 
     rotate.x = rotate.bind(null, 'x', 'y', 'z');
     rotate.y = rotate.bind(null, 'y', 'x', 'z');
-    rotate.z = rotate.bind(null, 'z', 'x', 'z');
+    rotate.z = rotate.bind(null, 'z', 'x', 'y');
 
     rotate.all = function rotateAll (v, r) {
       rotate.x(v, r);
