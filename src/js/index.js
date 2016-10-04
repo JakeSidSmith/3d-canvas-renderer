@@ -4,9 +4,9 @@
 
 (function () {
 
-  var down = false;
-  var pmouse;
   var teapot;
+  var down = false;
+  var pmouse = null;
   var velocity = new Vector(0, 0, 0);
   var rotation = new Vector(0, 0, 0);
   // var prevTime = performance.now();
@@ -59,6 +59,7 @@
 
   function mouseUp () {
     down = false;
+    pmouse = null;
   }
 
   window.addEventListener('mousedown', mouseDown);
