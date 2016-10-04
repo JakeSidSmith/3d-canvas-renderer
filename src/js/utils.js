@@ -29,7 +29,7 @@
   window.getObjectProperties = function getObjectProperties (response) {
     var vertices = window.getLinesBeginningWith(response, 'v ').map(function (v) {
       var parts = v.split(spaces);
-      return new Vector(parts[1], parts[2], parts[3]);
+      return new Vector(parts[1], parts[2] * -1, parts[3]);
     });
 
     var faces = window.getLinesBeginningWith(response, 'f ').map(function (v) {

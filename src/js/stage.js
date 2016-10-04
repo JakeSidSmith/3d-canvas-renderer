@@ -4,9 +4,6 @@
 
 (function () {
 
-  // var far = 1000;
-  // var close = -1000;
-
   window.Stage = function Stage (element) {
     var self = this;
     var shapes = [];
@@ -28,18 +25,22 @@
           // z * x & y
 
           // Rotation X
-          x = Math.cos(rx) * x + Math.sin(rx) * z;
-          y = y;
-          z = Math.cos(rx) * z + Math.sin(rx) * x;
+          var distance = canvas.getDistance(0, 0, y, z);
+          var angle = canvas.getAngle(0, 0, y, z);
+          x = x;
+          y = Math.cos(angle + rx) * distance;
+          z = Math.sin(angle + rx) * distance;
 
           // Rotation Y
-          x = x;
-          y = Math.cos(ry) * y + Math.sin(ry) * z;
-          z = Math.cos(ry) * z + Math.sin(ry) * y;
+          distance = canvas.getDistance(0, 0, x, z);
+          angle = canvas.getAngle(0, 0, x, z);
+          x = Math.cos(angle + ry) * distance;
+          y = y;
+          z = Math.sin(angle + ry) * distance;
 
-          // Rotation Z
-          var distance = canvas.getDistance(0, 0, x, y);
-          var angle = canvas.getAngle(0, 0, x, y);
+          // // Rotation Z
+          distance = canvas.getDistance(0, 0, x, y);
+          angle = canvas.getAngle(0, 0, x, y);
           x = Math.cos(angle + rz) * distance;
           y = Math.sin(angle + rz) * distance;
           z = z;
@@ -52,7 +53,7 @@
             .beginPath()
             .plotPixel(x, y)
             .closePath()
-            .fill('black');
+            .fill(canvas.createHSL(120 + z / 2, 100, 35));
         });
     };
 

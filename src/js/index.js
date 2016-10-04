@@ -17,14 +17,13 @@
 
       var obj = getObjectProperties(response);
       var teapot = new Shape(obj.vertices, obj.faces);
-      teapot.invert();
       teapot.setScale(100, 100, 100);
       teapot.setRotation(rotationX, rotationY, rotationZ);
 
       stage.add(teapot);
 
       setInterval(function () {
-        // rotationX += 1;
+        rotationX += 1;
         rotationY += 1;
         rotationZ += 1;
         teapot.setRotation(rotationX, rotationY, rotationZ);
