@@ -26,6 +26,12 @@
       rotate.z(v, r);
     };
 
+    function anchor (v, shape) {
+      v.x -= shape.ax;
+      v.y -= shape.ay;
+      v.z -= shape.az;
+    }
+
     function scale (v, shape) {
       v.x *= shape.sx;
       v.y *= shape.sy;
@@ -54,8 +60,9 @@
           };
 
           // Rotation X
-          rotate.all(v, r);
+          anchor(v, shape);
           scale(v, shape);
+          rotate.all(v, r);
           translate(v, shape);
 
           canvas

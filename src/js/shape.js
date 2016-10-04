@@ -12,6 +12,9 @@
     self.x = 0;
     self.y = 0;
     self.z = 0;
+    self.ax = 0;
+    self.ay = 0;
+    self.az = 0;
     self.sx = 1;
     self.sy = 1;
     self.sz = 1;
@@ -78,6 +81,12 @@
       self.x = x;
       self.y = y;
       self.z = z;
+    };
+
+    self.anchor = function (ax, ay, az) {
+      self.ax = ax;
+      self.ay = ay;
+      self.az = az;
     };
 
     return self;
