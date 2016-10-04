@@ -8,7 +8,7 @@
   var rotationX = 0;
   var rotationY = 0;
   var rotationZ = 0;
-  var prevTime = new Date().getTime();
+  var prevTime = performance.now();
   var stage = new Stage(document.getElementById('canvas'));
 
   function scaleTeapot () {
@@ -17,7 +17,7 @@
   }
 
   function update () {
-    var nextTime = new Date().getTime();
+    var nextTime = performance.now();
     var delta = (nextTime - prevTime) * 0.1;
 
     rotationX += delta * 0.5;
