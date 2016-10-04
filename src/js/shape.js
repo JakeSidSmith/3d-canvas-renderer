@@ -14,9 +14,9 @@
     self.sx = 1;
     self.sy = 1;
     self.sz = 1;
-    self.rx = 1;
-    self.ry = 1;
-    self.rz = 1;
+    self.rx = 0;
+    self.ry = 0;
+    self.rz = 0;
 
     self.invert = function invert () {
       each(self.vertices, function (v) {

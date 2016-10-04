@@ -9,7 +9,20 @@
     self.y = parseFloat(y);
     self.z = parseFloat(z);
 
+    function standardizeValue (v) {
+      if (typeof v !== 'object') {
+        return {
+          x: v,
+          y: v,
+          z: v
+        };
+      }
+
+      return v;
+    }
+
     self.add = function add (v) {
+      v = standardizeValue(v);
       self.x += v.x;
       self.y += v.y;
       self.z += v.z;
@@ -17,6 +30,7 @@
     };
 
     self.sub = function add (v) {
+      v = standardizeValue(v);
       self.x -= v.x;
       self.y -= v.y;
       self.z -= v.z;
@@ -24,6 +38,7 @@
     };
 
     self.mul = function add (v) {
+      v = standardizeValue(v);
       self.x *= v.x;
       self.y *= v.y;
       self.z *= v.z;
@@ -31,6 +46,7 @@
     };
 
     self.div = function add (v) {
+      v = standardizeValue(v);
       self.x /= v.x;
       self.y /= v.y;
       self.z /= v.z;

@@ -4,10 +4,11 @@
 
 (function () {
 
+  var down = false;
+  var pmouse;
   var teapot;
-  var rotationX = 0;
-  var rotationY = 0;
-  var rotationZ = 0;
+  var velocity = new Vector(0, 0, 0);
+  var rotation = new Vector(0, 0, 0);
   var prevTime = performance.now();
   var stage = new Stage(document.getElementById('canvas'));
 
@@ -20,24 +21,62 @@
     var nextTime = performance.now();
     var delta = (nextTime - prevTime) * 0.02;
 
-    rotationX += delta * 0.5;
-    rotationY += delta * 1;
-    rotationZ += delta * 0.25;
-    teapot.setRotation(rotationX, rotationY, rotationZ);
+    rotation.add(velocity);
+
+    teapot.setRotation(rotation.x, rotation.y, rotation.z);
     stage.draw();
+
+    velocity.mul(0.9);
 
     prevTime = nextTime;
     window.requestAnimationFrame(update);
   }
 
-  window.addEventListener('resize', scaleTeapot);
+  function mouseDown (event) {
+    event.preventDefault();
+    down = true;
+  }
+
+  function mouseMove (event) {
+    if (event.touches && event.touches.length) {
+      event.clientX = event.touches[0].clientX;
+      event.clientY = event.touches[0].clientY;
+    }
+
+    if (down && pmouse) {
+      velocity.add({
+        x: (pmouse.clientY - event.clientY) / 50,
+        y: (pmouse.clientX - event.clientX) / 50,
+        z: 0
+      });
+    }
+
+    pmouse = {
+      clientX: event.clientX,
+      clientY: event.clientY
+    };
+  }
+
+  function mouseUp () {
+    down = false;
+  }
+
+  window.addEventListener('mousedown', mouseDown);
+  window.addEventListener('touchstart', mouseDown);
+
+  window.addEventListener('mousemove', mouseMove);
+  window.addEventListener('touchmove', mouseMove);
+
+  window.addEventListener('mouseup', mouseUp);
+  window.addEventListener('touchend', mouseUp);
+
+  window.addEventListener('resize', window.requestAnimationFrame.bind(null, scaleTeapot));
 
   get(
     'objs/teapot.obj',
     function (response) {
       var obj = getObjectProperties(response);
       teapot = new Shape(obj.vertices, obj.faces);
-      teapot.setRotation(rotationX, rotationY, rotationZ);
       scaleTeapot();
       stage.add(teapot);
 
