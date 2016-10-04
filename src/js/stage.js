@@ -1,4 +1,4 @@
-/* global Canvasimo, Vector */
+/* global Canvasimo */
 
 'use strict';
 
@@ -24,7 +24,7 @@
       rotate.x(v, r);
       rotate.y(v, r);
       rotate.z(v, r);
-    }
+    };
 
     function scale (v, shape) {
       v.x *= shape.sx;
