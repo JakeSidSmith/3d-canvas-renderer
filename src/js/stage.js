@@ -18,13 +18,19 @@
 
     rotate.x = rotate.bind(null, 'x', 'y', 'z');
     rotate.y = rotate.bind(null, 'y', 'x', 'z');
-    rotate.z = rotate.bind(null, 'z', 'x', 'z');
+    rotate.z = rotate.bind(null, 'z', 'x', 'y');
 
     rotate.all = function rotateAll (v, r) {
       rotate.x(v, r);
       rotate.y(v, r);
       rotate.z(v, r);
     };
+
+    function anchor (v, shape) {
+      v.x -= shape.ax;
+      v.y -= shape.ay;
+      v.z -= shape.az;
+    }
 
     function scale (v, shape) {
       v.x *= shape.sx;
@@ -54,8 +60,9 @@
           };
 
           // Rotation X
-          rotate.all(v, r);
+          anchor(v, shape);
           scale(v, shape);
+          rotate.all(v, r);
           translate(v, shape);
 
           canvas
