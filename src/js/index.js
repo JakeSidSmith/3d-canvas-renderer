@@ -23,9 +23,9 @@
       stage.add(teapot);
 
       setInterval(function () {
-        rotationX += 1;
+        rotationX += 0.5;
         rotationY += 1;
-        rotationZ += 1;
+        rotationZ += 0.25;
         teapot.setRotation(rotationX, rotationY, rotationZ);
         stage.draw();
       }, 1000 / 30);
