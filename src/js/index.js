@@ -4,7 +4,15 @@
 
 (function () {
 
+  var teapot;
   var stage = new Stage(document.getElementById('canvas'));
+
+  function scaleTeapot () {
+    var scale = Math.min(window.innerWidth, window.innerHeight) / 10;
+    teapot.setScale(scale, scale, scale);
+  }
+
+  window.addEventListener('resize', scaleTeapot);
 
   get(
     'objs/teapot.obj',
@@ -16,10 +24,9 @@
       var rotationZ = 0;
 
       var obj = getObjectProperties(response);
-      var teapot = new Shape(obj.vertices, obj.faces);
-      teapot.setScale(100, 100, 100);
+      teapot = new Shape(obj.vertices, obj.faces);
       teapot.setRotation(rotationX, rotationY, rotationZ);
-
+      scaleTeapot();
       stage.add(teapot);
 
       setInterval(function () {
