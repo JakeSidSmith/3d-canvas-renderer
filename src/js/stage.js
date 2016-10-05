@@ -93,6 +93,7 @@
     self.draw = function draw () {
       canvas
         .clearCanvas()
+        .fillCanvas('#333')
         .translate(canvas.getWidth() / 2, canvas.getHeight() / 2)
         .forEach(shapes, function (shape) {
           self.drawShape(shape);
