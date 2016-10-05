@@ -79,7 +79,7 @@
       var obj = getObjectProperties(response);
       teapot = new Shape(obj.vertices, obj.faces);
       // Some .obj files are inverted and therefore must be inverted
-      teapot.invert(1, -1, 1);
+      teapot.invert();
       // Adjust the anchor to be in the very center of the teapot
       teapot.anchor(0, -teapot.lengthY / 2, 0);
       scaleTeapot();
