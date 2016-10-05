@@ -54,7 +54,7 @@
       };
 
       function getVertex (vertex, index) {
-        if (cachedVertices[index]) {
+        if (typeof cachedVertices[index] !== 'undefined') {
           return cachedVertices[index];
         }
 
