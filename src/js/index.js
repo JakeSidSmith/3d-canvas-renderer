@@ -13,7 +13,7 @@
   var stage = new Stage(document.getElementById('canvas'));
 
   function scaleTeapot () {
-    var scale = Math.min(window.innerWidth, window.innerHeight) / 5;
+    var scale = Math.min(window.innerWidth, window.innerHeight) / 4;
     teapot.scale(scale, scale, scale);
   }
 
