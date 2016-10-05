@@ -9,21 +9,21 @@
     var shapes = [];
     var canvas = new Canvasimo(element);
 
-    function rotate (direction, axis1, axis2, v, r) {
+    function rotateDirection (direction, axis1, axis2, v, r) {
       var distance = canvas.getDistance(0, 0, v[axis1], v[axis2]);
       var angle = canvas.getAngle(0, 0, v[axis1], v[axis2]);
       v[axis1] = Math.cos(angle + r[direction]) * distance;
       v[axis2] = Math.sin(angle + r[direction]) * distance;
     }
 
-    rotate.x = rotate.bind(null, 'x', 'y', 'z');
-    rotate.y = rotate.bind(null, 'y', 'x', 'z');
-    rotate.z = rotate.bind(null, 'z', 'x', 'y');
+    var rotateX = rotateDirection.bind(null, 'x', 'y', 'z');
+    var rotateY = rotateDirection.bind(null, 'y', 'x', 'z');
+    var rotateZ = rotateDirection.bind(null, 'z', 'x', 'y');
 
-    rotate.all = function rotateAll (v, r) {
-      rotate.x(v, r);
-      rotate.y(v, r);
-      rotate.z(v, r);
+    function rotate (v, r) {
+      rotateX(v, r);
+      rotateY(v, r);
+      rotateZ(v, r);
     };
 
     function anchor (v, shape) {
@@ -45,25 +45,39 @@
     }
 
     self.drawShape = function drawShape (shape) {
+      var cachedVertices = [];
+
+      var r = {
+        x: canvas.getRadiansFromDegrees(shape.rx),
+        y: canvas.getRadiansFromDegrees(shape.ry),
+        z: canvas.getRadiansFromDegrees(shape.rz)
+      };
+
+      function getVertex (vertex, index) {
+        if (cachedVertices[index]) {
+          return cachedVertices[index];
+        }
+
+        var v = {
+          x: vertex.x,
+          y: vertex.y,
+          z: vertex.z
+        };
+
+        // Rotation X
+        anchor(v, shape);
+        scale(v, shape);
+        rotate(v, r);
+        translate(v, shape);
+
+        cachedVertices[index] = v;
+
+        return v;
+      }
+
       canvas
-        .forEach(shape.vertices, function (vertex) {
-          var r = {
-            x: canvas.getRadiansFromDegrees(shape.rx),
-            y: canvas.getRadiansFromDegrees(shape.ry),
-            z: canvas.getRadiansFromDegrees(shape.rz)
-          };
-
-          var v = {
-            x: vertex.x,
-            y: vertex.y,
-            z: vertex.z
-          };
-
-          // Rotation X
-          anchor(v, shape);
-          scale(v, shape);
-          rotate.all(v, r);
-          translate(v, shape);
+        .forEach(shape.vertices, function (vertex, index) {
+          var v = getVertex(vertex, index);
 
           canvas
             .beginPath()
