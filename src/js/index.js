@@ -78,7 +78,7 @@
     function (response) {
       var obj = getObjectProperties(response);
       teapot = new Shape(obj.vertices, obj.faces);
-      teapot.anchor(0, -teapot.lengthY / 2, 0)
+      teapot.anchor(0, -teapot.lengthY / 2, 0);
       scaleTeapot();
       stage.add(teapot);
 
