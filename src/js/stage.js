@@ -76,14 +76,17 @@
       }
 
       canvas
-        .forEach(shape.vertices, function (vertex, index) {
-          var v = getVertex(vertex, index);
-
+        .forEach(shape.faces, function (face) {
           canvas
-            .beginPath()
-            .plotPixel(v.x, v.y)
-            .closePath()
-            .fill(canvas.createHSL(120 + v.z / 2, 100, 35));
+            .forEach(face, function (vertex) {
+              var v = getVertex(shape.vertices[vertex], vertex);
+
+              canvas
+                .beginPath()
+                .plotPixel(v.x, v.y)
+                .closePath()
+                .fill(canvas.createHSL(120 + v.z / 2, 100, 35));
+            });
         });
     };
 
