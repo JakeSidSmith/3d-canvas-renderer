@@ -9,6 +9,10 @@
 
     self.vertices = vertices;
     self.faces = faces;
+
+    console.log('Vertices:', vertices.length);
+    console.log('Faces:', faces.length);
+
     self.x = 0;
     self.y = 0;
     self.z = 0;
