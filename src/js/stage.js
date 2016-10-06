@@ -113,6 +113,13 @@
       canvas
         .clearCanvas()
         .fillCanvas('#333')
+        .setFontFamily('arial')
+        .setFontSize(14)
+        .setTextAlign('start')
+        .setTextBaseline('top')
+        .setFill('white')
+        .fillText('Click and drag to rotate', 10, 10)
+        .fillText('Hold shift to move', 10, 30)
         .translate(canvas.getWidth() / 2, canvas.getHeight() / 2)
         .forEach(shapes, function (shape) {
           self.drawShape(shape);
