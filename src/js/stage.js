@@ -4,6 +4,9 @@
 
 (function () {
 
+  var near = 1000;
+  var far = -near;
+
   window.Stage = function Stage (element) {
     var self = this;
     var shapes = [];
@@ -44,6 +47,12 @@
       v.z += shape.z;
     }
 
+    function perspective (v) {
+      var mult = canvas.map(v.z, far, near, 0, 2);
+      v.x *= mult;
+      v.y *= mult;
+    }
+
     self.drawShape = function drawShape (shape) {
       var cachedVertices = [];
 
@@ -69,6 +78,7 @@
         scale(v, shape);
         rotate(v, r);
         translate(v, shape);
+        perspective(v);
 
         cachedVertices[index] = v;
 
