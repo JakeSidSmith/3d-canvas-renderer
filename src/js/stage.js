@@ -77,9 +77,6 @@
 
       canvas
         .forEach(shape.faces, function (face) {
-
-          var i = 0;
-
           var a = getVertex(shape.vertices[face.x], face.x);
           var b = getVertex(shape.vertices[face.y], face.y);
           var c = getVertex(shape.vertices[face.z], face.z);
@@ -88,27 +85,15 @@
             return;
           }
 
+          var depth = (a.z + b.z + c.z) / 3;
+
           canvas
-            .forEach(face, function (vertexIndex, letter) {
-              var v = getVertex(shape.vertices[vertexIndex], vertexIndex);
-
-              if (i === 0) {
-                canvas
-                  .beginPath()
-                  .moveTo(v.x, v.y);
-              } else {
-                canvas
-                  .lineTo(v.x, v.y);
-              }
-
-              if (i === 2) {
-                canvas
-                  .closePath()
-                  .stroke(canvas.createHSL(120 + v.z / 2, 100, 35));
-              }
-
-              i += 1;
-            });
+            .beginPath()
+            .moveTo(a.x, a.y)
+            .lineTo(b.x, b.y)
+            .lineTo(c.x, c.y)
+            .closePath()
+            .stroke(canvas.createHSL(120 + depth / 2, 100, 35));
         });
     };
 
