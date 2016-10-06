@@ -13,7 +13,7 @@
   var stage = new Stage(document.getElementById('canvas'));
 
   function scaleTeapot () {
-    var scale = Math.min(window.innerWidth, window.innerHeight) / 10;
+    var scale = Math.min(window.innerWidth, window.innerHeight) / 4;
     teapot.scale(scale, scale, scale);
   }
 
@@ -74,11 +74,14 @@
   window.addEventListener('resize', window.requestAnimationFrame.bind(null, scaleTeapot));
 
   get(
-    'objs/teapot.obj',
+    'objs/wt_teapot.obj',
     function (response) {
       var obj = getObjectProperties(response);
       teapot = new Shape(obj.vertices, obj.faces);
-      teapot.anchor(0, -teapot.lengthY / 2, 0)
+      // Some .obj files are inverted and therefore must be inverted
+      teapot.invert();
+      // Adjust the anchor to be in the very center of the teapot
+      teapot.anchor(0, -teapot.lengthY / 2, 0);
       scaleTeapot();
       stage.add(teapot);
 

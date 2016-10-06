@@ -29,12 +29,16 @@
   window.getObjectProperties = function getObjectProperties (response) {
     var vertices = window.getLinesBeginningWith(response, 'v ').map(function (v) {
       var parts = v.split(spaces);
-      return new Vector(parts[1], parts[2] * -1, parts[3]);
+      var vertex = new Vector(parts[1], parts[2], parts[3]);
+      return vertex;
     });
 
     var faces = window.getLinesBeginningWith(response, 'f ').map(function (v) {
       var parts = v.split(spaces);
-      return new Vector(parts[1], parts[2], parts[3]);
+      var vertex = new Vector(parts[1], parts[2], parts[3]);
+      // Vertex indices start at 1, but javascript indices start at zero, so we minus 1 from every vertex
+      vertex.sub(1, 1, 1);
+      return vertex;
     });
 
     return {
