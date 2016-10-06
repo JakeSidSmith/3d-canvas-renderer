@@ -77,11 +77,20 @@
 
       canvas
         .forEach(shape.faces, function (face) {
+
           var i = 0;
 
+          var a = getVertex(shape.vertices[face.x], face.x);
+          var b = getVertex(shape.vertices[face.y], face.y);
+          var c = getVertex(shape.vertices[face.z], face.z);
+
+          if (canvas.getAngle(a.x, a.y, b.x, b.y, c.x, c.y) >= 0) {
+            return;
+          }
+
           canvas
-            .forEach(face, function (vertex, letter) {
-              var v = getVertex(shape.vertices[vertex], vertex);
+            .forEach(face, function (vertexIndex, letter) {
+              var v = getVertex(shape.vertices[vertexIndex], vertexIndex);
 
               if (i === 0) {
                 canvas
