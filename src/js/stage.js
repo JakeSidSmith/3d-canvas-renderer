@@ -115,6 +115,7 @@
         .fillCanvas('#333')
         .setFontFamily('arial')
         .setFontSize(14)
+        .setFontWeight('normal')
         .setTextAlign('start')
         .setTextBaseline('top')
         .setFill('white')
