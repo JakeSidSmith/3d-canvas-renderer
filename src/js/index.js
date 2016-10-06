@@ -51,7 +51,7 @@
     if (down && pmouse) {
       if (event.shiftKey) {
         translationVelocity.add({
-          x: 0,
+          x: (event.clientX - pmouse.clientX) / 2,
           y: 0,
           z: (event.clientY - pmouse.clientY) / 2
         });

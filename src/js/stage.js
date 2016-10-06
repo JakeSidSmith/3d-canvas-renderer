@@ -47,10 +47,10 @@
       v.z += shape.z;
     }
 
-    function perspective (v) {
-      var mult = canvas.constrain(canvas.map(v.z, far, near, 0, 2), 0, 2);
-      v.x *= mult;
-      v.y *= mult;
+    function perspective (v, scaleMult) {
+      var offsetMult = canvas.constrain(canvas.map(v.z, far, near, 0.5, 1.5), 0.5, 1.5);
+      v.x *= offsetMult * scaleMult;
+      v.y *= offsetMult * scaleMult;
     }
 
     self.drawShape = function drawShape (shape) {
@@ -61,6 +61,8 @@
         y: canvas.getRadiansFromDegrees(shape.ry),
         z: canvas.getRadiansFromDegrees(shape.rz)
       };
+
+      var scaleMult = canvas.constrain(canvas.map(shape.z, far, near, 0, 2), 0, 2);
 
       function getVertex (vertex, index) {
         if (typeof cachedVertices[index] !== 'undefined') {
@@ -78,7 +80,7 @@
         scale(v, shape);
         rotate(v, r);
         translate(v, shape);
-        perspective(v);
+        perspective(v, scaleMult);
 
         cachedVertices[index] = v;
 
