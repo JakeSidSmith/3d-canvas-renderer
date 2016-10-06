@@ -48,7 +48,7 @@
     }
 
     function perspective (v, scaleMult) {
-      var offsetMult = canvas.constrain(canvas.map(v.z, far, near, 0.5, 1.5), 0.5, 1.5);
+      var offsetMult = canvas.constrain(canvas.map(v.z, far, near, 0.6, 1.4), 0.6, 1.4);
       v.x *= offsetMult * scaleMult;
       v.y *= offsetMult * scaleMult;
     }
