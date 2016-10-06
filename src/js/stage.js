@@ -104,7 +104,7 @@
             .lineTo(b.x, b.y)
             .lineTo(c.x, c.y)
             .closePath()
-            .stroke(canvas.createHSL(120 + depth / 2, 100, 35));
+            .stroke();
         });
     };
 
@@ -117,6 +117,8 @@
         .setFontWeight('normal')
         .setTextAlign('start')
         .setTextBaseline('top')
+        .setStroke('#ccc')
+        .setStrokeWidth(0.5)
         .setFill('white')
         .fillText('Click and drag to rotate', 10, 10)
         .fillText('Hold shift to move', 10, 30)
