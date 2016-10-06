@@ -75,7 +75,6 @@
           z: vertex.z
         };
 
-        // Rotation X
         anchor(v, shape);
         scale(v, shape);
         rotate(v, r);
