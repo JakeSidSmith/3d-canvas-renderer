@@ -55,7 +55,7 @@
         translationVelocity.add({
           x: 0,
           y: 0,
-          z: (pmouse.clientY - event.clientY) / 20
+          z: (event.clientY - pmouse.clientY) / 2
         });
       } else {
         rotationVelocity.add({
