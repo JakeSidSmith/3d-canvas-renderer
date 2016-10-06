@@ -48,7 +48,7 @@
     }
 
     function perspective (v) {
-      var mult = canvas.map(v.z, far, near, 0, 2);
+      var mult = canvas.constrain(canvas.map(v.z, far, near, 0, 2), 0, 2);
       v.x *= mult;
       v.y *= mult;
     }
