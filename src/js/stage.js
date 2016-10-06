@@ -96,8 +96,6 @@
             return;
           }
 
-          var depth = (a.z + b.z + c.z) / 3;
-
           canvas
             .beginPath()
             .moveTo(a.x, a.y)
