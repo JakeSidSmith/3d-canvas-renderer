@@ -77,15 +77,28 @@
 
       canvas
         .forEach(shape.faces, function (face) {
+          var i = 0;
+
           canvas
-            .forEach(face, function (vertex) {
+            .forEach(face, function (vertex, letter) {
               var v = getVertex(shape.vertices[vertex], vertex);
 
-              canvas
-                .beginPath()
-                .plotPixel(v.x, v.y)
-                .closePath()
-                .fill(canvas.createHSL(120 + v.z / 2, 100, 35));
+              if (i === 0) {
+                canvas
+                  .beginPath()
+                  .moveTo(v.x, v.y);
+              } else {
+                canvas
+                  .lineTo(v.x, v.y);
+              }
+
+              if (i === 2) {
+                canvas
+                  .closePath()
+                  .stroke(canvas.createHSL(120 + v.z / 2, 100, 35));
+              }
+
+              i += 1;
             });
         });
     };
