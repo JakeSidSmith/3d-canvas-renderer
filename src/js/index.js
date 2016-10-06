@@ -48,8 +48,6 @@
       event.clientY = event.touches[0].clientY;
     }
 
-    console.log(event);
-
     if (down && pmouse) {
       if (event.shiftKey) {
         translationVelocity.add({
