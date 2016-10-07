@@ -103,7 +103,7 @@
             .lineTo(c.x, c.y)
             .closePath()
             .stroke()
-            .fill('rgba(255, 255, 255, 0.2)')
+            .fill('rgba(255, 255, 255, 0.2)');
         });
     };
 
