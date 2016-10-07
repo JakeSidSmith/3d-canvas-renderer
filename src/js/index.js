@@ -7,8 +7,10 @@
   var teapot;
   var down = false;
   var pmouse = null;
-  var velocity = new Vector(0, 0, 0);
+  var rotationVelocity = new Vector(0, 0, 0);
   var rotation = new Vector(0, 0, 0);
+  var translationVelocity = new Vector(0, 0, 0);
+  var translation = new Vector(0, 0, 0);
   // var prevTime = performance.now();
   var stage = new Stage(document.getElementById('canvas'));
 
@@ -21,12 +23,15 @@
     // var nextTime = performance.now();
     // var delta = (nextTime - prevTime) * 0.02; // Roughly 1
 
-    rotation.add(velocity);
+    rotation.add(rotationVelocity);
+    translation.add(translationVelocity);
 
     teapot.rotate(rotation.x, rotation.y, rotation.z);
+    teapot.translate(translation.x, translation.y, translation.z);
     stage.draw();
 
-    velocity.mul(0.9);
+    rotationVelocity.mul(0.9);
+    translationVelocity.mul(0.9);
 
     // prevTime = nextTime;
     window.requestAnimationFrame(update);
@@ -44,11 +49,19 @@
     }
 
     if (down && pmouse) {
-      velocity.add({
-        x: (pmouse.clientY - event.clientY) / 20,
-        y: (pmouse.clientX - event.clientX) / 20,
-        z: 0
-      });
+      if (event.shiftKey) {
+        translationVelocity.add({
+          x: (event.clientX - pmouse.clientX) / 2,
+          y: 0,
+          z: (event.clientY - pmouse.clientY) / 2
+        });
+      } else {
+        rotationVelocity.add({
+          x: (pmouse.clientY - event.clientY) / 20,
+          y: (pmouse.clientX - event.clientX) / 20,
+          z: 0
+        });
+      }
     }
 
     pmouse = {

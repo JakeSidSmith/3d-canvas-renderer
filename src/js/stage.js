@@ -4,6 +4,9 @@
 
 (function () {
 
+  var near = 1000;
+  var far = -near;
+
   window.Stage = function Stage (element) {
     var self = this;
     var shapes = [];
@@ -44,6 +47,12 @@
       v.z += shape.z;
     }
 
+    function perspective (v, scaleMult) {
+      var offsetMult = canvas.constrain(canvas.map(v.z, far, near, 0.6, 1.4), 0.6, 1.4);
+      v.x *= offsetMult * scaleMult;
+      v.y *= offsetMult * scaleMult;
+    }
+
     self.drawShape = function drawShape (shape) {
       var cachedVertices = [];
 
@@ -52,6 +61,8 @@
         y: canvas.getRadiansFromDegrees(shape.ry),
         z: canvas.getRadiansFromDegrees(shape.rz)
       };
+
+      var scaleMult = canvas.constrain(canvas.map(shape.z, far, near, 0, 2), 0, 2);
 
       function getVertex (vertex, index) {
         if (typeof cachedVertices[index] !== 'undefined') {
@@ -64,11 +75,11 @@
           z: vertex.z
         };
 
-        // Rotation X
         anchor(v, shape);
         scale(v, shape);
         rotate(v, r);
         translate(v, shape);
+        perspective(v, scaleMult);
 
         cachedVertices[index] = v;
 
@@ -85,15 +96,14 @@
             return;
           }
 
-          var depth = (a.z + b.z + c.z) / 3;
-
           canvas
             .beginPath()
             .moveTo(a.x, a.y)
             .lineTo(b.x, b.y)
             .lineTo(c.x, c.y)
             .closePath()
-            .stroke(canvas.createHSL(120 + depth / 2, 100, 35));
+            .stroke()
+            .fill('rgba(255, 255, 255, 0.2)')
         });
     };
 
@@ -101,6 +111,16 @@
       canvas
         .clearCanvas()
         .fillCanvas('#333')
+        .setFontFamily('arial')
+        .setFontSize(14)
+        .setFontWeight('normal')
+        .setTextAlign('start')
+        .setTextBaseline('top')
+        .setFill('#ccc')
+        .setStroke('#ccc')
+        .setStrokeWidth(0.5)
+        .fillText('Click and drag to rotate', 10, 10)
+        .fillText('Hold shift to move', 10, 30)
         .translate(canvas.getWidth() / 2, canvas.getHeight() / 2)
         .forEach(shapes, function (shape) {
           self.drawShape(shape);
