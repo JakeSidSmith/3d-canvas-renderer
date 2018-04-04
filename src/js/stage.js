@@ -27,7 +27,7 @@
       rotateX(v, r);
       rotateY(v, r);
       rotateZ(v, r);
-    };
+    }
 
     function anchor (v, shape) {
       v.x -= shape.ax;
