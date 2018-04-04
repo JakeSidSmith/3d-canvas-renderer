@@ -10,7 +10,8 @@
   window.Stage = function Stage (element) {
     var self = this;
     var shapes = [];
-    var canvas = new Canvasimo(element).setDensity(0.5);
+    var canvas = new Canvasimo(element)
+      .setDensity(2);
 
     function rotateDirection (direction, axis1, axis2, v, r) {
       var distance = canvas.getDistance(0, 0, v[axis1], v[axis2]);
@@ -109,7 +110,6 @@
 
     self.draw = function draw () {
       canvas
-        .clearCanvas()
         .fillCanvas('#333')
         .setFontFamily('arial')
         .setFontSize(14)

@@ -87,7 +87,7 @@
   window.addEventListener('resize', window.requestAnimationFrame.bind(null, scaleTeapot));
 
   get(
-    'objs/wt_teapot.obj',
+    'objs/teapot_low.obj',
     function (response) {
       var obj = getObjectProperties(response);
       teapot = new Shape(obj.vertices, obj.faces);
