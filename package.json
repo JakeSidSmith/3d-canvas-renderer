@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "http-server . -c-1 -o",
-    "test": "eslint -c node_modules/eslintrc/.eslintrc-es5 src/js/"
+    "test": "eslint src/js/"
   },
   "repository": {
     "type": "git",
@@ -28,10 +28,11 @@
   },
   "homepage": "https://github.com/jakesidsmith/3d-canvas-renderer#readme",
   "dependencies": {
-    "canvasimo": "=0.5.2"
+    "canvasimo": "0.5.2"
   },
   "devDependencies": {
-    "eslintrc": "git+https://github.com/JakeSidSmith/eslintrc.git#v0.0.2",
-    "http-server": "=0.9.0"
+    "eslint": "3.19.0",
+    "eslint-config-jakesidsmith": "github:jakesidsmith/eslintrc#v2.2.1",
+    "http-server": "0.11.1"
   }
 }
