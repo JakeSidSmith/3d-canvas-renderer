@@ -5,3 +5,4 @@ coverage/**
 npm-debug.log*
 
 !node_modules/canvasimo/lib/index.js
+!node_modules/canvasimo/dist/index.js
