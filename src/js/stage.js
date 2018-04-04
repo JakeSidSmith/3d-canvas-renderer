@@ -1,8 +1,8 @@
-/* global Canvasimo */
-
 'use strict';
 
 (function () {
+
+  var Canvasimo = window.canvasimo.default;
 
   var near = 1000;
   var far = -near;

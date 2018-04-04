@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/jakesidsmith/3d-canvas-renderer#readme",
   "dependencies": {
-    "canvasimo": "0.5.2"
+    "canvasimo": "0.6.5"
   },
   "devDependencies": {
     "eslint": "3.19.0",
