@@ -1,8 +1,8 @@
-/* global Canvasimo */
-
 'use strict';
 
 (function () {
+
+  var Canvasimo = window.canvasimo.default;
 
   var near = 1000;
   var far = -near;
@@ -10,7 +10,8 @@
   window.Stage = function Stage (element) {
     var self = this;
     var shapes = [];
-    var canvas = new Canvasimo(element);
+    var canvas = new Canvasimo(element)
+      .setDensity(2);
 
     function rotateDirection (direction, axis1, axis2, v, r) {
       var distance = canvas.getDistance(0, 0, v[axis1], v[axis2]);
@@ -27,7 +28,7 @@
       rotateX(v, r);
       rotateY(v, r);
       rotateZ(v, r);
-    };
+    }
 
     function anchor (v, shape) {
       v.x -= shape.ax;
@@ -103,13 +104,12 @@
             .lineTo(c.x, c.y)
             .closePath()
             .stroke()
-            .fill('rgba(255, 255, 255, 0.2)');
+            .fill();
         });
     };
 
     self.draw = function draw () {
       canvas
-        .clearCanvas()
         .fillCanvas('#333')
         .setFontFamily('arial')
         .setFontSize(14)
@@ -121,6 +121,7 @@
         .setStrokeWidth(0.5)
         .fillText('Click and drag to rotate', 10, 10)
         .fillText('Hold shift to move', 10, 30)
+        .setFill('rgba(255, 255, 255, 0.2)')
         .translate(canvas.getWidth() / 2, canvas.getHeight() / 2)
         .forEach(shapes, function (shape) {
           self.drawShape(shape);
