@@ -103,7 +103,7 @@
             .lineTo(c.x, c.y)
             .closePath()
             .stroke()
-            .fill('rgba(255, 255, 255, 0.2)');
+            .fill();
         });
     };
 
@@ -121,6 +121,7 @@
         .setStrokeWidth(0.5)
         .fillText('Click and drag to rotate', 10, 10)
         .fillText('Hold shift to move', 10, 30)
+        .setFill('rgba(255, 255, 255, 0.2)')
         .translate(canvas.getWidth() / 2, canvas.getHeight() / 2)
         .forEach(shapes, function (shape) {
           self.drawShape(shape);
